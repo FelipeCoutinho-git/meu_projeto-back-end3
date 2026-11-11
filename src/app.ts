@@ -9,11 +9,11 @@ Porque o TypeScript, quando compila para JavaScript,
 gera arquivos .js. Portanto, ao importar um módulo TypeScript 
 em outro arquivo TypeScript, você deve usar a extensão .js 
 para que o Node.js consiga localizar o arquivo corretamente.
-*/ 
+*/
 /* Porque o TypeScript compila o código para JavaScript, e o Node.js só entende arquivos JavaScript. 
 Então, mesmo que o arquivo original seja Player.ts, após a compilação ele se torna Player.js, 
 e é por isso que precisamos importar com a extensão .js. */
-import { Player } from "./models/Player.js"; 
+import { Player } from "./models/Player.js";
 
 // Cria uma aplicação Express
 // A função express() devolve um objeto que representa o servidor da aplicação
@@ -57,14 +57,14 @@ app.post("/player/damage", (req: Request, res: Response) => {
     const { damage } = req.body;
     //Chamar o método takeDamage() do player e armazenar a mensagem de retorno
     const damageMessage = player.takeDamage(damage);
-    res.json({ 
-    //Retorna a mensagem de dano, a vida atual e o nível atual do player
-    action: damageMessage,
-    //Retorna a vida atual do player
-    currentHealth: player.health,
-    //Retorna o nível atual do player
-    currentLevel: player.level,
-    });   
+    res.json({
+        //Retorna a mensagem de dano, a vida atual e o nível atual do player
+        action: damageMessage,
+        //Retorna a vida atual do player
+        currentHealth: player.health,
+        //Retorna o nível atual do player
+        currentLevel: player.level,
+    });
 });
 
 // Rota POST para curar o player
@@ -100,6 +100,22 @@ app.listen(PORT, () => {
     console.log(`POST http://localhost:${PORT}/player/attack - Atacar o jogador`);
     console.log(`POST http://localhost:${PORT}/player/damage - Causar dano ao jogador`);
     console.log(`POST http://localhost:${PORT}/player/heal - Curar o jogador`);
-    
 
-    });
+
+});
+
+
+/* 
+O código acima cria um servidor web usando a biblioteca Express, que é uma ferramenta popular para criar aplicações web em Node.js. 
+Ele define várias rotas (endereços) que permitem interagir com um objeto "Player" (jogador) criado a partir da classe Player.
+
+Resumo do que cada parte do código faz:
+- `app.use(express.json())`: Configura o middleware para permitir que o servidor aceite requisições com corpo em formato JSON.
+- `app.get("/player")`: Define uma rota GET que retorna as informações do jogador em formato JSON quando acessada.
+- `app.post("/player/attack")`: Define uma rota POST que simula um ataque do jogador e retorna uma mensagem sobre o ataque.
+- `app.post("/player/damage")`: Define uma rota POST que permite causar dano ao jogador, atualizando sua saúde e retornando informações sobre o dano recebido.
+- `app.post("/player/heal")`: Define uma rota POST que permite curar o jogador, aumentando sua saúde e retornando informações sobre a cura.
+- `app.post("/player/levelup")`: Define uma rota POST que permite aumentar o nível do jogador, atualizando seu nível e retornando informações sobre o aumento de nível.
+- `app.listen(PORT)`: Inicia o servidor na porta definida (8081) e exibe mensagens no console indicando que o servidor está rodando e quais rotas estão disponíveis para uso.
+Em resumo, este código cria um servidor web que permite interagir com um jogador virtual, permitindo atacar, causar dano, curar e aumentar o nível do jogador através de requisições HTTP. 
+*/
